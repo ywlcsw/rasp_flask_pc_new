@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <title>Login Page-435</title>
+    <link rel="shortcut icon" href="/static/registration_icon/icon.png" />
+    <link rel="stylesheet" href="/static/registration_css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/registration_css/form-elements.css">
+    <link rel="stylesheet" href="/static/registration_css/style.css">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <style>
+        body{
+            background:url(/static/registration_icon/background.png) ;
+            background-repeat: repeat-x;
+            background-repeat: repeat-y;
+            background-size: 100%;
+            //font-size: 16px;
+            -webkit-animation-name: pictures;
+            -webkit-animation-duration: 7s;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-delay: 0s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: alternate;
+            -webkit-animation-play-state: running;
+        }
+        form{
+            //background-image: url("/static/login_icon/login.png");
+            //background-color: #1e2023;
+            //margin-top: 300px;
+            //position: fixed;
+            left: 10%;
+            //top: 10px;
+            //padding: 100px;
+            padding-top: 10%;
+            padding-bottom: 30%;
+            padding-left:5%;
+            padding-right: 70%;
+        }
+        .fun{
+            position: fixed;
+            left: 1480px;
+            top: 400px;
+            padding: 100px;
+        }
+    </style>
+</head>
+<body>
+   <div class="container" style="margin-top: 200px;">
+       <form method="post" action="/registration/" class="registration-form">
+            <div class="form-group">
+                <label style="text-align: left;color: #b92c28">User name：</label>
+                <input type="text" name="form-user_name" placeholder="用户名..." class="form-first-name form-control" id="form-user_name" required>
+            </div>
+            <div class="form-group">
+                <label style="text-align: left;color: #b92c28">Real name：</label>
+                <input type="text" name="form-real_name" placeholder="真实名..." class="form-last-name form-control" id="form-real_name" required>
+            </div>
+            <div class="form-group">
+                <label style="text-align: left;color: #b92c28">Password：</label>
+                <input type="text" name="form-password" placeholder="密码..." class="form-email form-control" id="form_pwd" required>
+            </div>
+            <div class="form-group">
+                <label style="text-align: left;color: #b92c28">Email：</label>
+                <input type="text" name="form-email" placeholder="邮箱..." class="form-email form-control" id="form_email" required>
+            </div>
+            <script type="text/javascript">
+            function checkform(){
+                if(document.getElementById('form-user_name').value.length==0){
+                    alert('输入为空！');
+                    document.getElementById('form-user_name').focus();
+                    return false;
+                }
+                if(document.getElementById('form-real_name').value.length==0){
+                    alert('输入为空！');
+                    document.getElementById('form-real_name').focus();
+                    return false;
+                }
+                if(document.getElementById('form_pwd').value.length==0){
+                    alert('输入为空！');
+                    document.getElementById('form_pwd').focus();
+                    return false;
+                }
+                if(document.getElementById('form_email').value.length==0){
+                    alert('输入为空！');
+                    document.getElementById('form_email').focus();
+                    return false;
+                }
+                if(document.getElementById('form_pwd').value.length!=0 && document.getElementById('form_email').value.length!=0 &&
+                document.getElementById('form-real_name').value.length!=0 && document.getElementById('form-user_name').value.length!=0){
+                     　　　　alert("请重新登录");
+                          //window.location.href="{{url_for('login')}}";
+                }
+            }
+            </script>
+            <button type="submit" class="btn" style="width: 50%;margin-top: 10px;margin-left: 0%" onclick="checkform()">Sign me up!</button>
+            <a href="{{ url_for('login') }}"><p style="color: #0000FF;text-decoration: underline;font-size: 20px">I have an account,relogin!</p></a>
+       </form>
+   </div>
+</body>
+</html>

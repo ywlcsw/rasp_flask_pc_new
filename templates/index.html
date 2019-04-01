@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <title>Loading</title>
+</head>
+<body>
+    <p style="color: #FF0000;font-size: 50px;text-align:center;">加载数据库...请耐心等待！<br/>如为首次加载，时间会较长！</p>
+    <p style="color: #0000FF;font-size: 40px;text-align:center;">Data Page:</p>
+    <p class="crawl_page" style="color: #0000FF;font-size: 30px;text-align:center;"></p>
+    <script>
+$(document).ready(function(){
+        })
+      function auto_crawl_page(){
+               $.ajax({
+                type: 'get',
+                url: "{{url_for('redirect_to_home_page')}}",
+                //data:$("#count").text(),
+                //contentType: "application/json",
+                dataType: 'text',
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                        alert(XMLHttpRequest.status);
+                        alert(textStatus.readyState);
+                        },
+                success: function(datas){
+                    $(".crawl_page").text(datas);
+                        }
+                });
+      };
+    setInterval(auto_crawl_page,500);
+</script>
+    <p class="redirect_flag" hidden></p>
+    <script>
+$(document).ready(function(){
+        })
+      function auto_redirect(){
+               $.ajax({
+                type: 'get',
+                url: "{{url_for('redirect_to_home')}}",
+                //data:$("#count").text(),
+                //contentType: "application/json",
+                dataType: 'text',
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                        alert(XMLHttpRequest.status);
+                        alert(textStatus.readyState);
+                        },
+                success: function(datas){
+                    $(".redirect_flag").text(datas);
+                        if($(".redirect_flag").text()=='ok'){
+                            alert('成功');
+                            window.location.href="{{ url_for('home') }}";
+                        }
+                        }
+                });
+      };
+    setInterval(auto_redirect,5000);
+</script>
+</body>
+</html>

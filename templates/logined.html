@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <title>Control Page-435</title>
+  <link rel="stylesheet" href="/static/logined_css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/static/logined_icon/logo.png" />
+    <style>
+        .textbutton{
+            padding-bottom: 0px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+  <div class="body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <aside class="mdc-persistent-drawer mdc-persistent-drawer--open">
+      <nav class="mdc-persistent-drawer__drawer">
+        <div class="mdc-persistent-drawer__toolbar-spacer">
+			<img src="/static/logined_icon/logo.png" height="70" width="70" alt="logo">
+        </div>
+        <div class="mdc-list-group">
+          <nav class="mdc-list mdc-drawer-menu">
+              <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="#" style="font-size: 10px;">
+
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="#" style="font-size: 25px;">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true"></i>
+                当前页面
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="{{ url_for('refresh',realname='') }}{{ realname }}" style="font-size: 25px;">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true"></i>
+                当前数据<br/>
+                Refresh
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item" href="#" data-toggle="expansionPanel" target-panel="ui-sub-menu">
+              <a class="mdc-drawer-link" href="#" style="font-size: 25px;">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true"></i>
+                树莓派控制
+                <i class="mdc-drawer-arrow material-icons"></i>
+              </a>
+              <div class="mdc-expansion-panel" id="ui-sub-menu">
+                <nav class="mdc-list mdc-drawer-submenu">
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a href="http://fvp8q1ail2.51http.tech/auto_rasp_start/{{ realname }}" class="mdc-drawer-link1" style="font-size: 18px;">
+                      Auto Control-Buttons
+                    </a>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                      $(".mdc-drawer-link1").click(function(){
+                      $(".mdc-drawer-link1").css("color","red");
+                       })
+                      })
+                    </script>
+                  </div>
+                  <div class="mdc-list-item mdc-drawer-item">
+                    <a class="mdc-drawer-link2" href="http://fvp8q1ail2.51http.tech/manual_raspberry/{{ realname }} " style="font-size: 18px;">
+                      Manual Control-Buttons
+                    </a>
+                    <script type="text/javascript">
+                      $(document).ready(function(){
+                      $(".mdc-drawer-link2").click(function(){
+                      $(".mdc-drawer-link2").css("color","red");
+                      })
+                      })
+                    </script>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="{{ url_for('chart',realname='') }}{{ realname }}" style="font-size: 25px;">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true"></i>
+                数据图表
+              </a>
+            </div>
+            <div class="mdc-list-item mdc-drawer-item">
+              <a class="mdc-drawer-link" href="http://fvp8q1ail2.51http.tech/camera/{{ realname }}" style="font-size: 25px;">
+                <i class="material-icons mdc-list-item__start-detail mdc-drawer-item-icon" aria-hidden="true"></i>
+                图像获取
+              </a>
+            </div>
+          </nav>
+        </div>
+      </nav>
+    </aside>
+    <!-- partial -->
+    <!-- partial:partials/_navbar.html -->
+    <header class="mdc-toolbar mdc-elevation--z4 mdc-toolbar--fixed">
+      <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+          <a href="#" class="menu-toggler material-icons mdc-toolbar__menu-icon">menu</a>
+          <span class="mdc-toolbar__input">
+            <div class="mdc-text-field">
+              <p id="time" style="font-size: 20px"></p>
+            </div>
+          </span>
+            <script>
+            function time(){
+                var today = new Date();
+                var year = today.getFullYear();
+                var month = today.getMonth()+1;
+                var day = today.getDay();
+                var hour = today.getHours();
+                var minute = today.getMinutes();
+                var second = today.getSeconds();
+
+                document.getElementById("time").innerHTML =
+                    year+"年"+month+"月"+day+"日 "+hour+":"+minute+":"+second;
+            }
+            setInterval('time()',500)
+            </script>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+          <div class="mdc-menu-anchor mr-1">
+            <a href="#" class="mdc-toolbar__icon toggle mdc-ripple-surface" data-toggle="dropdown" toggle-dropdown="logout-menu" data-mdc-auto-init="MDCRipple">
+              <p style="color:black" class="material-icons">你好，{{realname}} ！！！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---个人中心</p>
+            </a>
+            <div class="mdc-simple-menu mdc-simple-menu--right" tabindex="-1" id="logout-menu">
+                <ul class="mdc-simple-menu__items mdc-list" role="menu" aria-hidden="false">
+                  <li class="mdc-list-item" role="menuitem" >
+                    Settings
+                  </li>
+                    <a href="/login/" >
+                    <li class="mdc-list-item" role="menuitem" >
+                    Logout
+                    </li>
+                    </a>
+                </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+    <!-- partial -->
+  <div class="page-wrapper mdc-toolbar-fixed-adjust">
+      <main class="content-wrapper">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+{#                  <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-5">#}
+{#                      <a href="{{url_for('pa_logined',realname='') }}{{realname}}" class="mdc-button mdc-button--stroked mdc-button--dense refresh">#}
+{#                        Refresh#}
+{#                      </a>#}
+{#                      <script type="text/javascript">#}
+{#                         $(document).ready(function(){#}
+{#                      　　$("button").click(function(){#}
+{#                          $(this).css("background","red");#}
+{#                          $.ajax({#}
+{#                          type: 'GET',#}
+{#                          url: '/pa_update',#}
+{#                          //data:data1,#}
+{#                          contentType: "application/json",#}
+{#                          dataType: 'json',#}
+{#                          error: function(xhr, err){#}
+{#                                  //alert('请求失败')#}
+{#                              },#}
+{#                          success: function(){#}
+{#                                  //alert('请求成功')#}
+{#                              }#}
+{#                              });#}
+{#                      　　})#}
+{#                      })#}
+{#                      </script>#}
+{#                  </div>#}
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+              <div class="mdc-card card--with-avatar">
+                <section class="mdc-card__primary">
+                  <div class="card__avatar"><img src="/static/logined_icon/face.jpg" alt=""></div>
+                  <h1 class="mdc-card__title">Information Discription</h1>
+                  <span class="social__icon-badge mdc-twitter mdi mdi-twitter"></span>
+                </section>
+                <section class="mdc-card__supporting-text pt-1">
+
+                  <p class="mb-1">点击右侧refresh按钮</p>
+                  <p class="mb-2">获取当前最新的温室环境数据信息</p>
+                </section>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-8">
+              <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">时间日期</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[0] }}</h3>
+                      <p class="font-weight-normal mb-0 mt-0">时间日期</p>
+                    </div>
+                  </div>
+                </div>
+              <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">二氧化碳</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[1] }}</h3>
+                      <p class="font-weight-normal mb-0 mt-0">二氧化碳</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">空气温度</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[2] }}<sup>o</sup>C</h3>
+                      <p class="font-weight-normal mb-0 mt-0">空气温度</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">空气湿度</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[3] }}%</h3>
+                      <p class="font-weight-normal mb-0 mt-0">空气湿度</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">光照强度</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[4] }}lux</h3>
+                      <p class="font-weight-normal mb-0 mt-0">光照强度</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">土壤温度</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[5] }}<sup>o</sup>C</h3>
+                      <p class="font-weight-normal mb-0 mt-0">土壤温度</p>
+                    </div>
+                  </div>
+                </div>
+				<div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-4">
+                  <div class="mdc-card py-3 pl-2 d-flex flex-row align-item-center">
+                    <div class="mdc--tile mdc--tile-warning rounded">
+                      <i class="mdi mdi-ticket text-white icon-md">土壤湿度</i>
+                    </div>
+                    <div class="text-wrapper pl-1">
+                      <h3 class="mdc-typography--display1 font-weight-bold mb-1">{{ last_row_data_upload[6]}}%</h3>
+                      <p class="font-weight-normal mb-0 mt-0">土壤湿度</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="input_info">
+            <p style="font-size: 30px;color: #0000FF;padding-left: 100px;margin: 0;">备注(根据需要输入当前的操作...)：</p>
+            <div align="center">
+            <textarea id="textshow" type="text" style="height: 400px;width: 1500px;font-size: 30px;color: crimson;position: center" ></textarea>
+                </div>
+            <div align="center">
+            <button type="button" id="textresetbutton" style="height: 40px;width: 100px;position: relative;background-color: #b92c28;color: #0000FF" onclick="text_reset()">清空重置</button>
+            <button type="button" id="textrefreshbutton" style="height: 40px;width: 100px;position: relative;background-color: #b92c28;color: #0000FF" onclick="text_refresh()">刷新</button>
+
+            <button type="button" class="text_button" style="height: 40px;width: 100px;background-color: #b92c28;color: #0000FF">保存</button>
+            </div>
+
+        </div>
+        <script>
+          function textshow(){
+                   $.ajax({
+                    type: 'get',
+                    url: '{{ url_for("showtext") }}',
+                    //data:{},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function(datas){
+                           $("#textshow").html(datas);
+                            },
+                    error: function(XMLHttpRequest, err){
+                            alert(XMLHttpRequest.readyState);
+                            },
+                    });
+          };
+          setInterval(textshow,60000);
+        </script>
+        <script type="text/javascript">
+          function text_refresh(){
+                   $.ajax({
+                    type: 'get',
+                    url: '{{ url_for("showtext") }}',
+                    //data:{},
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function(datas){
+                           $("#textshow").val(datas);
+                            },
+                    error: function(XMLHttpRequest, err){
+                            alert(XMLHttpRequest.readyState);
+                            },
+                    });
+          };
+        </script>
+          <script type="text/javascript">
+          function text_reset() {
+              document.getElementById("textshow").value = "";
+          }
+        </script>
+        <script>
+        $(document).ready(function(){
+            $(".text_button").click(function(){
+                var x = $("#textshow").val()
+                var data={ 'text_save':x}
+                $.ajax({
+                    type: 'get',
+                    url: '/savetext',
+                    data:data,
+                    contentType: "application/json",
+                    dataType: 'json',
+                    success: function(data){
+                            //alert('请求成功');
+                            },
+                    error: function(xhr, err){
+                            //alert(xhr.readyState);
+                            },
+                        })
+                })
+            })
+        </script>
+      </main>
+      <!-- partial:partials/_footer.html -->
+
+      <footer>
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell stretch-card mdc-layout-grid__cell--span-6">
+              <span class="text-muted">Copyright © 2018 <a class="text-green" href="http://www.cau.edu.cn" target="_blank">CAU SGH</a></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- partial -->
+  </div>
+  </div>
+
+  <script src="/static/logined_js/material-components-web.min.js"></script>
+  <script src="/static/logined_js/progressbar.min.js"></script>
+  <script src="/static/logined_js/misc.js"></script>
+  <script src="/static/logined_js/material.js"></script>
+  <script src="/static/logined_js/dashboard.js"></script>
+</body>
+
+</html>
